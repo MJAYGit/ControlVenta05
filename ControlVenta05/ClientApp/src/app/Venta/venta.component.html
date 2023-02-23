@@ -1,0 +1,29 @@
+<h1 id="tableLabel">Lista de Ventas</h1>
+
+<p>Este componente muestra el resultado del api get ventas </p>
+<p>Token: {{ls_Authorization}} </p>
+
+<p *ngIf="!vVentasCli"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="vVentasCli">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>AssesorComercial</th>
+      <th>Fecha</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ventacli of vVentasCli">
+      <td>{{ ventacli.id }}</td>
+      <td>{{ ventacli.assesorComercial }}</td>
+      <td>{{ ventacli.fecha }}</td>
+      <td>{{ ventacli.producto }}</td>
+      <td>{{ ventacli.cantidad }}</td>
+      <td>{{ ventacli.precio }}</td>
+    </tr>
+  </tbody>
+</table>

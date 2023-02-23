@@ -8,8 +8,13 @@ export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }
 
+export function getBaseUrlBackEnd() {
+  return "https://localhost:51590/api/VentaControler/";
+}
+
 const providers = [
-  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+  { provide: 'BASE_URL_BACKEND', useFactory: getBaseUrlBackEnd, deps: [] } // mjay
 ];
 
 if (environment.production) {
