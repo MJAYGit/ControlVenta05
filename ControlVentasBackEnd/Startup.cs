@@ -12,6 +12,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ControlVentasBackEnd.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
 namespace ControlVentasBackEnd
 {
     public class Startup
@@ -26,6 +33,23 @@ namespace ControlVentasBackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddDbContext<VentaDbContext>(optionsAction: option =>
+             option.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(name: "MyDb")));
+
+            /* ========= Seguridad Token ========= */
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JWT:key").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+
+                    };
+                });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -48,12 +72,52 @@ namespace ControlVentasBackEnd
 
             app.UseRouting();
 
+            app.UseCors(
+                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()//mjay
+            );
+
+            app.UseAuthentication(); //mjay
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            // mjay
+            var scope = app.ApplicationServices.CreateScope();
+            var contxt = scope.ServiceProvider.GetService<VentaDbContext>();
+            DataInicial(contxt);
+
+        }
+
+        public static void DataInicial(VentaDbContext contexto)
+        {
+            Venta oVenta01 = new Venta()
+            {
+                Id = 1,
+                AssesorComercial = "Asesor 01",
+                Fecha = "01-01-2023",
+                Producto = "Producto 01",
+                Cantidad = 10,
+                Precio = 100
+            };
+
+            contexto.DbSetVenta.Add(oVenta01);
+
+            Venta oVenta02 = new Venta()
+            {
+                Id = 2,
+                AssesorComercial = "Asesor 02",
+                Fecha = "02-02-2023",
+                Producto = "Producto 02",
+                Cantidad = 20,
+                Precio = 200
+            };
+            contexto.DbSetVenta.Add(oVenta02);
+            contexto.SaveChanges();
+
         }
     }
 }
