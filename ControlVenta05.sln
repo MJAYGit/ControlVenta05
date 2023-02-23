@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlVenta05", "ControlVenta05\ControlVenta05.csproj", "{6A9DE77E-FC8A-4242-B2F4-8F7D233007AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlVentasBackEnd", "ControlVentasBackEnd\ControlVentasBackEnd.csproj", "{CCA457ED-E179-47BB-9FBC-2B1D9529E280}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A9DE77E-FC8A-4242-B2F4-8F7D233007AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A9DE77E-FC8A-4242-B2F4-8F7D233007AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A9DE77E-FC8A-4242-B2F4-8F7D233007AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A9DE77E-FC8A-4242-B2F4-8F7D233007AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCA457ED-E179-47BB-9FBC-2B1D9529E280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCA457ED-E179-47BB-9FBC-2B1D9529E280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCA457ED-E179-47BB-9FBC-2B1D9529E280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCA457ED-E179-47BB-9FBC-2B1D9529E280}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50157E88-143F-4CA0-B01A-47576D2B3EB8}
+	EndGlobalSection
+EndGlobal
