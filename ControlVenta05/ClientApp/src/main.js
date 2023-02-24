@@ -10,7 +10,7 @@ function getBaseUrl() {
 }
 exports.getBaseUrl = getBaseUrl;
 function getBaseUrlBackEnd() {
-    return "https://localhost:44307/api/VentaControler/";
+    return "https://localhost:51810/api/VentaControler/";
 }
 exports.getBaseUrlBackEnd = getBaseUrlBackEnd;
 var providers = [

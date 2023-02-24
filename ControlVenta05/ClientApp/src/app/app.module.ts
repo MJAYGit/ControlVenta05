@@ -25,7 +25,8 @@ import { VentaComponent } from './Venta/venta.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+     // { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: VentaComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'Venta', component: VentaComponent },
