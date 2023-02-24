@@ -9,7 +9,7 @@ export function getBaseUrl() {
 }
 
 export function getBaseUrlBackEnd() {
-  return "https://localhost:51810/api/VentaControler/";
+  return "https://localhost:61120/api/VentaControler/";
 }
 
 const providers = [

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using ControlVentasBackEnd.Model;
+using ControlVentasBackEnd.Infraestructura.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -50,6 +51,9 @@ namespace ControlVentasBackEnd
 
                     };
                 });
+
+            services.AddTransient<IVentaRepository, VentaRepository>();
+            /*==========*/
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
