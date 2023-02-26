@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ControlVentasBackEnd.Domain;
 
-namespace ControlVentasBackEnd.Model
+namespace ControlVentasBackEnd.Infraestructura.Data
 {
     public class VentaDbContext : DbContext
     {

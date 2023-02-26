@@ -2,7 +2,10 @@ import { Component, Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { forkJoin, throwError, pipe, BehaviorSubject, Observable, from } from 'rxjs';
 import { tap, catchError, flatMap } from 'rxjs/operators';
-
+import { Venta } from '../models/venta';
+import { Autorizacion } from '../models/autorizacion';
+import { VentaService } from '../services/venta.service';
+import { AutorizacionService } from '../services/autorizacion.service';
 
 @Component({
   selector: 'app-venta-component',
@@ -14,21 +17,22 @@ import { tap, catchError, flatMap } from 'rxjs/operators';
 
 export class VentaComponent {
 
-  public vVentasCli: VentaCli[];
+  public vVentasCli: Venta[];
+  public vAutorizacion: Autorizacion;
   private auth_token: string = "";
   public ls_Authorization: string = "";
   public xpArray: number[] = [1];
   ;
 
-  constructor(http: HttpClient, @Inject('BASE_URL_BACKEND') baseUrl: string) {
-
+  constructor(private aVentaService: VentaService, private aAutorizacionService: AutorizacionService) {
+    /*
     let oUsuario: cUsuario = new cUsuario();
     oUsuario.UsuarioNombre = "Admin";
-
+    */
     new Observable((observer) => { observer.next(1) })
       .pipe(
-        flatMap(() => this.ObtenerToken(http, baseUrl, oUsuario)),
-        flatMap(() => this.ListarVentas(http, baseUrl))
+        flatMap(() => this.ObtenerToken()),
+        flatMap(() => this.ListarVentas())
       )
       .subscribe(
         res => {
@@ -40,7 +44,28 @@ export class VentaComponent {
       );
   }
 
+  ObtenerToken() {
+    let oAutorizacion: Autorizacion = new Autorizacion();
+    oAutorizacion.usuarioNombre = "Admin";
 
+    return forkJoin(
+      this.xpArray.map(xpItem =>
+        this.aAutorizacionService.ObtenerToken(oAutorizacion)
+          .pipe(tap((result: Autorizacion) => this.auth_token = result.token))
+      )
+    )
+  }
+
+  ListarVentas() {
+    return forkJoin( 
+      this.xpArray.map(xpItem =>
+        this.aVentaService.ListarVentas(this.auth_token)
+          .pipe(tap((result) => this.vVentasCli = result))
+      ) 
+    );
+  }
+
+  /*
   ListarVentas(http: HttpClient, @Inject('BASE_URL_BACKEND') baseUrl: string) {
 
     this.ls_Authorization = "Bearer " + this.auth_token;
@@ -85,8 +110,11 @@ export class VentaComponent {
       )
     )
   }
+  */
 }
 
+
+/*
 interface VentaCli {
   id: number;
   assesorComercial: string;
@@ -103,3 +131,4 @@ class cUsuario {
 class cToken {
   token: string;
 }
+*/

@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\autorizacion.ts" />
+    <None Remove="ClientApp\src\app\models\venta.ts" />
+    <None Remove="ClientApp\src\app\services\autorizacion.service.ts" />
+    <None Remove="ClientApp\src\app\services\venta.service.ts" />
     <None Remove="ClientApp\src\app\Venta\venta.component.ts" />
   </ItemGroup>
 

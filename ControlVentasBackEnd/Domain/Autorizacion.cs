@@ -1,5 +1,5 @@
 ﻿
-namespace ControlVentasBackEnd.Model
+namespace ControlVentasBackEnd.Domain
 {
     public class Autorizacion
     {

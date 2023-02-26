@@ -1,16 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 /*==================*/
-using ControlVentasBackEnd.Model;
+using ControlVentasBackEnd.Domain;
+using ControlVentasBackEnd.Infraestructura.Data;
 using ControlVentasBackEnd.Infraestructura.Repositories;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -79,8 +73,8 @@ namespace ControlVentasBackEnd.Controllers
 
 
         /* ========= Seguridad Token ========= */
+        /*
         [HttpPost("Autenticar")]
-        //public async Task<IActionResult> Login(Usuario aUsuario)
         public IActionResult Login(Autorizacion aUsuario)
         {
 
@@ -115,7 +109,7 @@ namespace ControlVentasBackEnd.Controllers
             string sToken = new JwtSecurityTokenHandler().WriteToken(securityToken);
             return sToken;
         }
-
+        */
         /*
          
         [Authorize]
