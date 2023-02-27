@@ -11,8 +11,10 @@ constructor(private http: HttpClient, @Inject('BASE_URL_BACKEND') baseUrl: strin
   this._baseUrl = baseUrl;
 }
 
-  ListarVentas( asToken: string) {
- 
+  ListarVentas(asToken: string, asHost: string, asPuerto: string) {
+
+    const sMetodo: string = ""
+    const sApiUrl: string = "https://" + asHost + ":" + asPuerto + this._baseUrl + sMetodo;
     const sAuthorization = "Bearer " + asToken;
 
     const httpOptions = {
@@ -27,7 +29,7 @@ constructor(private http: HttpClient, @Inject('BASE_URL_BACKEND') baseUrl: strin
     };  
 
     console.log('paso listar');
-    return this.http.get<Venta[]>(this._baseUrl, httpOptions);
+    return this.http.get<Venta[]>(sApiUrl, httpOptions);
   }
 
 }

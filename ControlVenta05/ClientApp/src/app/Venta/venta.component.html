@@ -1,9 +1,21 @@
 <h1 id="tableLabel">Lista de Ventas</h1>
 
 <p>Este componente muestra el resultado del api get ventas con Token Bearer</p>
-<p>Token: {{ls_Authorization}} </p>
 
-<p *ngIf="!vVentasCli"><em>Loading...</em></p>
+Ingrese Host:
+<br />
+<input [(ngModel)]='sHost' type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+<br />
+Ingrese Puerto:
+<br />
+<input [(ngModel)]='sPuerto' type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+<p>https://{{ sHost }}:{{ sPuerto}}/api/VentaControler/</p>
+<br />
+<button class="btn btn-primary" (click)="CargarData()">Listar Ventas</button>
+<br />
+
+<p *ngIf="bCarga && !vVentasCli"><em>Loading...</em></p>
+<p *ngIf="sError!=''"><em>{{sError}}</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="vVentasCli">
   <thead>

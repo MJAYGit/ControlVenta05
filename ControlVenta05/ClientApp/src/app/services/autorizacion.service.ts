@@ -11,7 +11,11 @@ export class AutorizacionService {
     this._baseUrl = baseUrl;
   }
    
-  ObtenerToken(aUsuario: Autorizacion) {
+  ObtenerToken(aUsuario: Autorizacion, asHost: string, asPuerto: string) {
+
+    const sMetodo: string = "Autenticar" 
+    const sApiUrl: string = "https://" + asHost + ":" + asPuerto  + this._baseUrl + sMetodo;
+
     const httpOptions = {
       headers: new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
@@ -23,7 +27,7 @@ export class AutorizacionService {
     };  
 
     console.log('paso token');
-    return this.http.post<Autorizacion>(this._baseUrl + "Autenticar", aUsuario, httpOptions);
+    return this.http.post<Autorizacion>(sApiUrl, aUsuario, httpOptions);
   }
 
 }

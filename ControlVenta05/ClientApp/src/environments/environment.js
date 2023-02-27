@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = void 0;
 exports.environment = {
     production: false,
-    apiUrlauth: 'https://localhost:65451/api/Autorizacion/',
-    apiUrlventa: 'https://localhost:65451/api/VentaControler/'
+    //apiUrlauth: 'https://localhost:49924/api/Autorizacion/',
+    //apiUrlventa: 'https://localhost:49924/api/VentaControler/'
+    apiUrlauth: '/api/Autorizacion/',
+    apiUrlventa: '/api/VentaControler/'
 };
 /*
  * In development mode, to ignore zone related error stack frames such as
