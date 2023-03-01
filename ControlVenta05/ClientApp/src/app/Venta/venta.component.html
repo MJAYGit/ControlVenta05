@@ -2,40 +2,72 @@
 
 <p>Este componente muestra el resultado del api get ventas con Token Bearer</p>
 
-Ingrese Host:
-<br />
-<input [(ngModel)]='sHost' type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-<br />
-Ingrese Puerto:
-<br />
-<input [(ngModel)]='sPuerto' type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-<p>https://{{ sHost }}:{{ sPuerto}}/api/VentaControler/</p>
-<br />
-<button class="btn btn-primary" (click)="CargarData()">Listar Ventas</button>
-<br />
+<div >
+  <form [formGroup]="loginForm!" (ngSubmit)="CargarData" novalidate>
 
-<p *ngIf="bCarga && !vVentasCli"><em>Loading...</em></p>
-<p *ngIf="sError!=''"><em>{{sError}}</em></p>
+    <label>Ingrese Host:</label>
+    <input type="text"
+           formControlName="FormTxtHost"
+           required
+           class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="vVentasCli">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>AssesorComercial</th>
-      <th>Fecha</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Precio</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ventacli of vVentasCli">
-      <td>{{ ventacli.id }}</td>
-      <td>{{ ventacli.assesorComercial }}</td>
-      <td>{{ ventacli.fecha }}</td>
-      <td>{{ ventacli.producto }}</td>
-      <td>{{ ventacli.cantidad }}</td>
-      <td>{{ ventacli.precio }}</td>
-    </tr>
-  </tbody>
-</table>
+    <div *ngIf="
+        loginForm.controls['FormTxtHost'].invalid &&
+        (loginForm.controls['FormTxtHost'].dirty || loginForm.controls['FormTxtHost'].touched)
+      "
+         class="alert alert-danger">
+      <div *ngIf="loginForm.controls['FormTxtHost'].errors.required">
+        Host es requerido.
+      </div>
+    </div>
+    <p></p>
+    <label>Ingrese Puerto:</label>
+    <input type="number"
+           formControlName="FormTxtPuerto"
+           required
+           class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+
+    <div *ngIf="
+          loginForm.controls['FormTxtPuerto'].invalid &&
+          (loginForm.controls['FormTxtPuerto'].dirty || loginForm.controls['FormTxtPuerto'].touched)
+        "
+         class="alert alert-danger">
+      <div *ngIf="loginForm.controls['FormTxtPuerto'].errors.required">
+        Puerto es requerido.
+      </div>
+    </div>
+    <p></p>
+    <p>ApiUrl=> https://{{ loginForm.controls['FormTxtHost'].value }}:{{loginForm.controls['FormTxtPuerto'].value}}/api/VentaControler/</p>
+
+    <button class="btn btn-primary"
+            (click)="CargarData()"
+            [disabled]="loginForm.invalid">Listar Ventas
+    </button>
+    <p></p>
+  </form>
+  </div>
+    <p *ngIf="bCarga && !vVentasCli"><em>Loading...</em></p>
+    <p *ngIf="sError!=''"><em>{{sError}}</em></p>
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="vVentasCli">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Assesor Comercial</th>
+          <th>Fecha</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ventacli of vVentasCli">
+          <td>{{ ventacli.id }}</td>
+          <td>{{ ventacli.assesorComercial }}</td>
+          <td>{{ ventacli.fecha }}</td>
+          <td>{{ ventacli.producto }}</td>
+          <td>{{ ventacli.cantidad }}</td>
+          <td>{{ ventacli.precio }}</td>
+        </tr>
+      </tbody>
+    </table>
